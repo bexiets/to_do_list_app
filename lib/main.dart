@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:to_do_list_app/models/task_data.dart';
-import 'package:to_do_list_app/screens/tasks_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:to_do_list_app/cubit/todo_cubit.dart';
+
+import 'package:to_do_list_app/screens/tasks_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,11 +14,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) => TaskData(),
-      child: MaterialApp(
-        home: TasksScreen(),
-      ),
-    );
+    return BlocProvider(
+        create: (context) => TodoCubit(),
+        child: MaterialApp(
+          home: TasksScreen(),
+        ),
+      );
+    
   }
 }

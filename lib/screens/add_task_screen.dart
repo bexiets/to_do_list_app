@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:to_do_list_app/models/task_data.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-// ignore: must_be_immutable
+import 'package:to_do_list_app/cubit/todo_cubit.dart';
+
+
+
 class AddTaskScreen extends StatefulWidget {
 
 
@@ -47,7 +49,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             ),
             TextButton(
               onPressed:() {
-                Provider.of<TaskData>(context, listen: false).addTask(newTaskTitle);
+                BlocProvider.of<TodoCubit>(context).addTaskCubit(
+                  newTaskTitle.trim(),
+                );
                 Navigator.pop(context);
               },
               child: Text('Add', style: TextStyle(color: Colors.white),),
